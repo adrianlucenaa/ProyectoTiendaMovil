@@ -3,14 +3,10 @@ package org.example.Model.Domain;
 public class Buys {
     private int idBuys;
     private int IdCustomer;
-    private int IdProduct;
+    private int IdPhone;
     private String customerName;
 
-    public Buys(int idBuys, int idCustomer, int idProduct) {
-        this.idBuys = idBuys;
-        IdCustomer = idCustomer;
-        IdProduct = idProduct;
-    }
+    private double price;
 
     public Buys() {
 
@@ -20,7 +16,7 @@ public class Buys {
         return idBuys;
     }
 
-    public void setIdBuys(int id) {
+    public void setIdBuys(int idBuys) {
         this.idBuys = idBuys;
     }
 
@@ -32,15 +28,46 @@ public class Buys {
         IdCustomer = idCustomer;
     }
 
-    public int getIdProduct() {
-        return IdProduct;
+    public int getIdPhone() {
+        return IdPhone;
     }
 
-    public void setIdProduct(int idProduct) {
-        IdProduct = idProduct;
+    public void setIdPhone(int idPhone) {
+        IdPhone = idPhone;
+    }
+
+    public String getCustomerName() {
+        return customerName;
     }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Buys(int idBuys, int idCustomer, int idPhone, String customerName, double price) {
+        this.idBuys = idBuys;
+        IdCustomer = idCustomer;
+        IdPhone = idPhone;
+        this.customerName = customerName;
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Buys{" +
+                "IdBuys=" + idBuys +
+                ", IdCustomer=" + IdCustomer +
+                ", IdPhone=" + IdPhone +
+                ", customerName='" + customerName + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

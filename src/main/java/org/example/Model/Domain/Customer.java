@@ -12,6 +12,9 @@ public class Customer {
 
     private String address;
 
+    public Customer() {
+    }
+
     public int getIdCustomer() {
         return idCustomer;
     }
@@ -51,4 +54,10 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + idCustomer + ", Name: " + name + ", Number: " + number;
+    }
+
 }

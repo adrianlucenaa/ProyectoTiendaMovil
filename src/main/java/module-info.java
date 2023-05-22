@@ -12,4 +12,5 @@ module org.example {
     opens org.example.Model.Domain to javafx.fxml;
     requires java.sql;
     requires java.xml.bind;
+    requires org.junit.jupiter.api;
 }

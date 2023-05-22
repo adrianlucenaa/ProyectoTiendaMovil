@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 
+
 public class TestBuysDAO {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/proyecto";
@@ -14,7 +15,6 @@ public class TestBuysDAO {
         String pwd = "";
 
         try (Connection con = DriverManager.getConnection(url, user, pwd)) {
-
             BuysDAO buysDAO = new BuysDAO(con);
 
             try {
@@ -27,7 +27,7 @@ public class TestBuysDAO {
 
                 // Obtener una compra por su ID
                 int buysId = 1; // Reemplaza con un ID válido de tu base de datos
-                Buys buys = buysDAO.findById(buysId);
+                Buys buys = buysDAO.findById(String.valueOf(buysId));
                 if (buys != null) {
                     System.out.println("Compra encontrada: " + buys);
                 } else {
@@ -37,16 +37,20 @@ public class TestBuysDAO {
                 // Insertar una nueva compra
                 Buys newBuys = new Buys();
                 newBuys.setIdBuys(4); // Reemplaza con un ID válido utilizando el método correspondiente
-                newBuys.setCustomerName("Nombre del cliente"); // Reemplaza con el método adecuado para establecer el nombre del cliente
+                newBuys.setIdCustomer(1); // Reemplaza con un ID de cliente válido
+                newBuys.setIdPhone(1); // Reemplaza con un ID de teléfono válido
+                newBuys.setCustomerName("Nombre del cliente"); // Reemplaza con el nombre del cliente adecuado
+                newBuys.setPrice(100.0); // Reemplaza con el precio adecuado
                 Buys savedBuys = buysDAO.save(newBuys);
                 System.out.println("Nueva compra insertada: " + savedBuys);
-
-
 
                 // Actualizar una compra existente
                 Buys existingBuys = new Buys();
                 existingBuys.setIdBuys(1); // Reemplaza con un ID válido
-                existingBuys.setCustomerName("Nuevo nombre del cliente"); // Reemplaza con un nombre válido
+                existingBuys.setIdCustomer(1); // Reemplaza con un ID de cliente válido
+                existingBuys.setIdPhone(1); // Reemplaza con un ID de teléfono válido
+                existingBuys.setCustomerName("Nuevo nombre del cliente"); // Reemplaza con el nombre del cliente adecuado
+                existingBuys.setPrice(200.0); // Reemplaza con el precio adecuado
                 Buys updatedBuys = buysDAO.save(existingBuys);
                 System.out.println("Compra actualizada: " + updatedBuys);
 
