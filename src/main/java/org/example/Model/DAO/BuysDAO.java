@@ -66,7 +66,7 @@ public class BuysDAO implements DAO<Buys> {
     }
 
     @Override
-    public Buys save(Buys entity) throws SQLException {
+    public  Buys save(Buys entity) throws SQLException {
         if (entity != null) {
             Buys buys = findById(String.valueOf(entity.getIdBuys()));
             if (buys == null) {

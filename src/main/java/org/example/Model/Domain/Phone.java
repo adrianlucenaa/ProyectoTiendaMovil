@@ -56,11 +56,11 @@ public class Phone {
         this.yearrelease = yearrelease;
     }
 
-    public double getPrecio() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrice(double precio) {
         this.price = precio;
     }
 

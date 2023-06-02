@@ -45,7 +45,7 @@ public class PhoneDAO implements DAO<Phone> {
     }
 
     @Override
-    public Phone findById(String id) throws SQLException {
+    public  Phone findById(String id) throws SQLException {
         Phone result = null;
         try (PreparedStatement pst = this.conn.prepareStatement(FINDBYID)) {
             pst.setString(1, id);
@@ -54,6 +54,9 @@ public class PhoneDAO implements DAO<Phone> {
                     Phone phone = new Phone();
                     phone.setIdPhone(res.getInt("id"));
                     phone.setBrand(res.getString("brand"));
+                    phone.setName(res.getString("name"));
+                    phone.setPrice(res.getDouble("precio"));
+                    phone.setYearrelease(String.valueOf(res.getInt("yearrelease")));
                     result = phone;
                 }
             }
@@ -73,7 +76,7 @@ public class PhoneDAO implements DAO<Phone> {
                     pst.setString(2, entity.getName());
                     pst.setString(3, entity.getBrand());
                     pst.setString(4, entity.getYearrelease());
-                    pst.setDouble(5, entity.getPrecio());
+                    pst.setDouble(5, entity.getPrice());
                     pst.executeUpdate();
                 }
             } else {

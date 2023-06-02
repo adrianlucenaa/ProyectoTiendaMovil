@@ -8,22 +8,17 @@ import java.io.IOException;
 
 public class PrincipalController {
     @FXML
-    private Button iphoneButton;
+    private Button CustomerButton;
+
 
     @FXML
-    private Button samsungButton;
-
-    @FXML
-    private Button xiaomiButton;
-
-    @FXML
-    public void switchToIphone() throws IOException {
-        App.setRoot("Iphone");
+    public void switchToCustomer() throws IOException {
+        App.setRoot("Customer");
     }
 
     @FXML
-    public void switchToSamsung() throws IOException {
-        App.setRoot("Samsung");
+    public void switchToPhone() throws IOException {
+        App.setRoot("Phone");
     }
 
 
@@ -31,6 +26,8 @@ public class PrincipalController {
 
     }
 
+    public void initializeData() {
+    }
 }
 
 
