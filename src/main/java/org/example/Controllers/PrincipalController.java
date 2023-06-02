@@ -10,6 +10,11 @@ public class PrincipalController {
     @FXML
     private Button CustomerButton;
 
+    @FXML
+    private Button PhoneButton;
+
+    @FXML
+    private Button BuysButton;
 
     @FXML
     public void switchToCustomer() throws IOException {
@@ -21,6 +26,10 @@ public class PrincipalController {
         App.setRoot("Phone");
     }
 
+    @FXML
+    public void switchToBuys() throws IOException {
+        App.setRoot("Buys");
+    }
 
     public PrincipalController() {
 
