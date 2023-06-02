@@ -32,7 +32,7 @@ public class CustomerController {
 
     @FXML
     private TableColumn<Customer, String> addressColumn;
-
+    //Este es el comentario de prueba
     @FXML
     private TextField idField;
 
