@@ -9,7 +9,7 @@ class PhoneTest {
         // Arrange
         Phone phone = new Phone();
         phone.setBrand("Samsung");
-        phone.setName("Galaxy S21");
+        phone.setPhoneName("Galaxy S21");
 
         // Act
         String fullName = phone.getName();
@@ -23,7 +23,7 @@ class PhoneTest {
         // Arrange
         Phone phone = new Phone();
         phone.setBrand("Samsung");
-        phone.setName("Galaxy S21");
+        phone.setPhoneName("Galaxy S21");
         phone.setPrice(1000);
         double discountPercentage = 0.1;
 
