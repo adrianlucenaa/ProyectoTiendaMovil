@@ -1,5 +1,6 @@
 package org.example.Model.Domain;
 
+
 public class Phone {
     private int idPhone;
     private String PhoneName;

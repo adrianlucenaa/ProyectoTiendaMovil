@@ -14,7 +14,11 @@ import java.util.List;
 public class BuysDAO implements DAO<Buys> {
     private final static String FINDALL = "SELECT * FROM buys";
     private final static String FINDBYID = "SELECT * FROM buys WHERE idBuys=?";
-    private final static String INSERT = "INSERT INTO buys ( CustomerName, PhoneName,  price) VALUES ( ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO buys (CustomerName, PhoneName, price) " +
+            "SELECT c.customerName, p.phoneName, ? " +
+            "FROM customer c " +
+            "JOIN phone p ON c.idCustomer = p.customerId " +
+            "WHERE c.customerName = ? AND p.phoneName = ?";
     private final static String UPDATE = "UPDATE buys SET CustomerName=?, PhoneName=?,  price=? WHERE idBuys=?";
     private final static String DELETE = "DELETE FROM buys WHERE idBuys=?";
 
@@ -36,9 +40,9 @@ public class BuysDAO implements DAO<Buys> {
                 while (res.next()) {
                     Buys buys = new Buys();
                     buys.setIdBuys(res.getInt("IdBuys"));
+                    buys.setPrice(res.getDouble("price"));
                     buys.setCustomerName(res.getString("CustomerName"));
                     buys.setPhoneName(res.getString("PhoneName"));
-                    buys.setPrice(res.getDouble("price"));
                     result.add(buys);
                 }
             }
@@ -109,6 +113,24 @@ public class BuysDAO implements DAO<Buys> {
 
 
 
+    public List<Buys> searchByPhoneBrand(String brand) throws SQLException {
+        List<Buys> result = new ArrayList<>();
+        String query = "SELECT * FROM buys b JOIN phone p ON b.PhoneName = p.PhoneName WHERE LOWER(p.brand) LIKE ?";
+        try (PreparedStatement pst = this.conn.prepareStatement(query)) {
+            pst.setString(1, "%" + brand + "%");
+            try (ResultSet res = pst.executeQuery()) {
+                while (res.next()) {
+                    Buys buys = new Buys();
+                    buys.setIdBuys(res.getInt("IdBuys"));
+                    buys.setPrice(res.getDouble("price"));
+                    buys.setCustomerName(res.getString("CustomerName"));
+                    buys.setPhoneName(res.getString("PhoneName"));
+                    result.add(buys);
+                }
+            }
+        }
+        return result;
+    }
 
 
 

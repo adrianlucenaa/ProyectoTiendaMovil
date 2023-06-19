@@ -64,6 +64,7 @@ public class BuyController {
     @FXML
     private Button deleteButton;
 
+    private PhoneDAO phoneDAO;
     private BuysDAO buysDAO;
     private ObservableList<Buys> buysList;
 
@@ -71,6 +72,7 @@ public class BuyController {
     public void initialize() {
         buysDAO = new BuysDAO();
         buysList = FXCollections.observableArrayList();
+        phoneDAO = new PhoneDAO();
 
         configureTable();
         loadBuysData();
@@ -121,19 +123,18 @@ public class BuyController {
     @FXML
     void handleSearchButton() {
         String searchTerm = searchField.getText().toLowerCase();
-        List<Buys> searchResults = new ArrayList<>();
 
-        for (Buys buys : buysList) {
-            String customerName = buys.getCustomerName().toLowerCase();
-            String phoneName = buys.getPhoneName().toLowerCase();
-
-            if (customerName.contains(searchTerm) || phoneName.contains(searchTerm)) {
-                searchResults.add(buys);
-            }
+        try {
+            List<Buys> searchResults = buysDAO.searchByPhoneBrand(searchTerm);
+            buysList.setAll(searchResults);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        buysTable.setItems(FXCollections.observableArrayList(searchResults));
     }
+
+    // ...
+
+
 
     private void configureTable() {
         customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));

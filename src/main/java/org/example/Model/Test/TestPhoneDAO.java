@@ -38,7 +38,7 @@ public class TestPhoneDAO {
                 Phone newPhone = new Phone();
                 newPhone.setIdPhone(4); // Reemplaza con un ID válido
                 newPhone.setBrand("Samsung"); // Reemplaza con una marca válida
-                newPhone.setName("Xiaomi A10"); // Reemplaza "Nombre del teléfono" con el nombre adecuado
+                newPhone.setPhoneName("Xiaomi A10"); // Reemplaza "Nombre del teléfono" con el nombre adecuado
                 Phone savedPhone = phoneDAO.save(newPhone);
                 System.out.println("Nuevo teléfono insertado: " + savedPhone);
 
@@ -46,7 +46,7 @@ public class TestPhoneDAO {
                 Phone existingPhone = new Phone();
                 existingPhone.setIdPhone(1); // Reemplaza con un ID válido
                 existingPhone.setBrand("iPhone"); // Reemplaza con una marca válida
-                existingPhone.setName("Nuevo nombre"); // Reemplaza "Nuevo nombre" con el nombre adecuado
+                existingPhone.setPhoneName("Nuevo nombre"); // Reemplaza "Nuevo nombre" con el nombre adecuado
                 Phone updatedPhone = phoneDAO.save(existingPhone);
                 System.out.println("Teléfono actualizado: " + updatedPhone);
 

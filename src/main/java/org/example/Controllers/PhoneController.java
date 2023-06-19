@@ -114,7 +114,7 @@ public class PhoneController {
             double price = Double.parseDouble(priceField.getText());
 
             // Actualizar los valores del teléfono seleccionado
-            selectedPhone.setName(name);
+            selectedPhone.setPhoneName(name);
             selectedPhone.setBrand(brand);
             selectedPhone.setYearrelease(yearRelease);
             selectedPhone.setPrice(price);
