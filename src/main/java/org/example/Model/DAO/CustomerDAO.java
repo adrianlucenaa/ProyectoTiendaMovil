@@ -2,6 +2,7 @@ package org.example.Model.DAO;
 
 import org.example.Model.Connections.ConnectionMySQL;
 import org.example.Model.Domain.Customer;
+import org.example.Model.Domain.Phone;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -122,6 +123,34 @@ public class CustomerDAO implements DAO<Customer> {
                 pst.executeUpdate();
             }
         }
+    }
+
+    public List<Customer> searchCustomer(String searchText) throws SQLException {
+        List<Customer> customerList = new ArrayList<>();
+        String SEARCH_QUERY = "SELECT * FROM Customer WHERE IdCustomer = ? OR Name LIKE ?";
+        try (PreparedStatement ps = conn.prepareStatement(SEARCH_QUERY)) {
+            int searchId;
+            try {
+                searchId = Integer.parseInt(searchText);
+            } catch (NumberFormatException e) {
+                searchId = -1; // Valor inválido para el ID
+            }
+            ps.setInt(1, searchId);
+            String searchPattern = "%" + searchText + "%";
+            ps.setString(2, searchPattern);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Customer customer = new Customer();
+                    customer.setIdCustomer(rs.getInt("IdCustomer"));
+                    customer.setName(rs.getString("Name"));
+                    customer.setNumber(rs.getString("Number"));
+                    customer.setMail(rs.getString("Mail"));
+                    customer.setAddress(rs.getString("Address"));
+                    customerList.add(customer);
+                }
+            }
+        }
+        return customerList;
     }
 }
 

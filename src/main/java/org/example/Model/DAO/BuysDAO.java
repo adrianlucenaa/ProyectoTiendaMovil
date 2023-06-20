@@ -110,26 +110,7 @@ public class BuysDAO implements DAO<Buys> {
         }
     }
 
-    /*
-    public List<Buys> searchByPhoneBrand(Phone brand) throws SQLException {
-        List<Buys> result = new ArrayList<>();
-        String query = "SELECT * FROM buys b JOIN phone p ON b.PhoneName = p.PhoneName WHERE LOWER(p.brand) LIKE ?";
-        try (PreparedStatement pst = this.conn.prepareStatement(query)) {
-            pst.setString(1, "%" + brand + "%");
-            try (ResultSet res = pst.executeQuery()) {
-                while (res.next()) {
-                    Buys buys = new Buys();
-                    buys.setIdBuys(res.getInt("IdBuys"));
-                    buys.setPrice(res.getDouble("price"));
-                    buys.setCustomerName(res.getString("CustomerName"));
-                    buys.setPhoneName(res.getString("PhoneName"));
-                    result.add(buys);
-                }
-            }
-        }
-        return result;
-    }
-  */
+
 
     public List<Phone> searchPhones(String searchText) throws SQLException {
         List<Phone> phoneList = new ArrayList<>();
@@ -158,6 +139,20 @@ public class BuysDAO implements DAO<Buys> {
             }
         }
         return phoneList;
+    }
+
+
+    public void update(Buys selectedBuys) throws SQLException {
+        if (selectedBuys != null) {
+            String UPDATE_QUERY = "UPDATE Buys SET customerName = ?, phoneName = ?, price = ? WHERE id = ?";
+            try (PreparedStatement pst = conn.prepareStatement(UPDATE_QUERY)) {
+                pst.setString(1, selectedBuys.getCustomerName());
+                pst.setString(2, selectedBuys.getPhoneName());
+                pst.setDouble(3, selectedBuys.getPrice());
+                pst.setInt(4, selectedBuys.getIdBuys());
+                pst.executeUpdate();
+            }
+        }
     }
 
 }

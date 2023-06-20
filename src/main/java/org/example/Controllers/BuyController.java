@@ -21,8 +21,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import org.example.Model.DAO.BuysDAO;
+import org.example.Model.DAO.CustomerDAO;
 import org.example.Model.DAO.PhoneDAO;
 import org.example.Model.Domain.Buys;
+import org.example.Model.Domain.Customer;
 import org.example.Model.Domain.Phone;
 
 import java.io.IOException;
@@ -36,15 +38,13 @@ public class BuyController {
     private TextField searchField;
 
     @FXML
+    private TextField searchcustomerfield;
+
+    @FXML
     private TableView<Buys> buysTable;
-    @FXML
-    private TableView<Phone> tableView;
 
-    @FXML
-    private TableColumn<Phone, String> brandColumn;
 
-    @FXML
-    private TableColumn<Phone, String> PhoneNameColumn;
+
 
     @FXML
     private TableColumn<Buys, String> customerColumn;
@@ -67,8 +67,9 @@ public class BuyController {
     @FXML
     private Button backButton;
 
+
     @FXML
-    private Button searchButton;
+    private Button UpdateButton;
 
     @FXML
     private Button addButton;
@@ -79,7 +80,15 @@ public class BuyController {
     @FXML
     private ListView<Phone> phonesSearched;
 
+    @FXML
+    private  ListView<Customer> searchCustomerList;
+
+
+
     private PhoneDAO phoneDAO;
+
+    private CustomerDAO customerDAO;
+
     private BuysDAO buysDAO;
     private ObservableList<Buys> buysList;
 
@@ -95,6 +104,8 @@ public class BuyController {
         //configurePhoneTable();
 
         configureSearch();
+
+        configureSearchCustomer();
 
 
     }
@@ -148,6 +159,39 @@ public class BuyController {
 
         });
     }
+
+    private void configureSearchCustomer() {
+        this.searchCustomerList.setVisible(false);
+        searchCustomerList.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    // Actualizar los campos de texto
+                    if (newValue != null) {
+                        customerField.setText(newValue.getName());
+                    }
+                }
+        );
+
+        searchcustomerfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Esto se ejecuta cada vez que alguien escribe algo
+            // Buscar clientes que coincidan en nombre con el valor newValue
+            CustomerDAO customerDAO = new CustomerDAO();
+
+            try {
+                List<Customer> customers = customerDAO.searchCustomer(newValue);
+                if (customers.size() == 0 || newValue.equals("")) {
+                    this.searchCustomerList.setVisible(false);
+                } else {
+                    this.searchCustomerList.setVisible(true);
+                    ObservableList<Customer> customersO = FXCollections.observableArrayList(customers);
+                    this.searchCustomerList.setItems(customersO);
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     @FXML
     void handleDeleteButton() {
         Buys selectedBuys = buysTable.getSelectionModel().getSelectedItem();
@@ -240,144 +284,33 @@ public class BuyController {
     }
 
     @FXML
-    public void handleSearchButton() {
-        String brand = searchField.getText(); // Obtener el texto de búsqueda desde un campo de texto
+    void handleUpdateButton(ActionEvent event) {
+        // Obtener la compra seleccionada en la tabla
+        Buys selectedBuy = buysTable.getSelectionModel().getSelectedItem();
 
-        // Realizar la búsqueda en la base de datos utilizando el PhoneDAO
-        try {
-            List<Phone> phones = phoneDAO.search(brand);
-            tableView.getItems().clear(); // Limpiar los elementos existentes en la tabla
-            tableView.getItems().addAll(phones); // Agregar los teléfonos encontrados a la tabla
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+        if (selectedBuy != null) {
+            // Obtener los nuevos valores ingresados en los campos de texto
+            String customerName = customerField.getText();
+            String phoneName = phoneField.getText();
+            double price = Double.parseDouble(priceField.getText());
 
-    private void configurePhoneTable() {
-        // Configurar columnas personalizadas para el TableView de Phone
-        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        PhoneNameColumn.setCellValueFactory(new PropertyValueFactory<>("phoneName"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        // Agrega más columnas personalizadas según tus necesidades
+            // Actualizar los valores de la compra seleccionada
+            selectedBuy.setCustomerName(customerName);
+            selectedBuy.setPhoneName(phoneName);
+            selectedBuy.setPrice(price);
 
-        // Configurar el TableView de Phone
-        tableView.setEditable(false); // Configurar si se permite editar las celdas
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // Configurar política de redimensionamiento de columnas
-    }
-
-
-    /*
-    @FXML
-    void handleSearchButton() {
-        String query = searchField.getText();
-
-        if (query.isEmpty()) {
-            loadPhonesData(); // Cargar todos los teléfonos si la búsqueda está vacía
-        } else {
             try {
-                PhoneDAO phoneDAO = new PhoneDAO(); // Crear una instancia de PhoneDAO
-                List<Phone> searchResults = phoneDAO.searchByBrand(query);
-                showSearchResults(searchResults);
+                // Actualizar la compra en la base de datos
+                buysDAO.update(selectedBuy);
+
+                // Actualizar la tabla y limpiar los campos de texto
+                loadBuysData();
+                clearFields();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
-    private void showSearchResults(List<Phone> searchResults) {
-        if (searchResults.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Búsqueda de Teléfono");
-            alert.setHeaderText("No se encontraron resultados.");
-            alert.setContentText("No se encontraron teléfonos que coincidan con la marca especificada.");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Búsqueda de Teléfono");
-            alert.setHeaderText("Resultados de búsqueda:");
-
-            // Crear un ListView para mostrar los resultados
-            ListView<Phone> listView = new ListView<>(FXCollections.observableArrayList(searchResults));
-            listView.setCellFactory(param -> new ListCell<Phone>() {
-                @Override
-                protected void updateItem(Phone phone, boolean empty) {
-                    super.updateItem(phone, empty);
-                    if (empty || phone == null) {
-                        setText(null);
-                    } else {
-                        setText(phone.getPhoneName());
-                    }
-                }
-            });
-
-            alert.getDialogPane().setContent(listView);
-            alert.showAndWait();
-        }
-    }
-
-
-
-
-    private Phone selectPhoneFromList(List<Phone> phones) {
-        // Crear una nueva ventana de diálogo para mostrar la lista de teléfonos
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Seleccionar Teléfono");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-
-        // Crear una tabla y sus columnas para mostrar la lista de teléfonos
-        TableView<Phone> phoneTable = new TableView<>();
-        TableColumn<Phone, String> brandColumn = new TableColumn<>("Marca");
-        TableColumn<Phone, String> modelColumn = new TableColumn<>("Modelo");
-        // Agrega aquí las demás columnas necesarias para mostrar la información del teléfono
-
-        // Configura las celdas de las columnas con los valores de las propiedades del teléfono
-        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-        // Configura aquí las celdas de las demás columnas
-
-        // Agrega las columnas a la tabla
-        phoneTable.getColumns().addAll(brandColumn, modelColumn);
-        // Agrega aquí las demás columnas a la tabla
-
-        // Crea una lista observable con los teléfonos
-        ObservableList<Phone> phoneList = FXCollections.observableArrayList(phones);
-
-        // Agrega los teléfonos a la tabla
-        phoneTable.setItems(phoneList);
-
-        // Configura la selección de una única fila en la tabla
-        phoneTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        // Crea un botón para seleccionar el teléfono y cierra la ventana de diálogo
-        Button selectButton = new Button("Seleccionar");
-        selectButton.setOnAction(event -> {
-            Phone selectedPhone = phoneTable.getSelectionModel().getSelectedItem();
-            if (selectedPhone != null) {
-                dialogStage.close();
-            } else {
-                // Muestra un mensaje de error o realiza alguna acción adicional en caso de que no se haya seleccionado ningún teléfono
-            }
-        });
-
-        // Crea un contenedor para los elementos de la ventana de diálogo
-        VBox dialogContent = new VBox(phoneTable, selectButton);
-        dialogContent.setSpacing(10);
-        dialogContent.setPadding(new Insets(10));
-
-        // Crea una escena y asigna el contenido al escenario de diálogo
-        Scene dialogScene = new Scene(dialogContent);
-        dialogStage.setScene(dialogScene);
-
-        // Muestra la ventana de diálogo y espera a que se cierre
-        dialogStage.showAndWait();
-
-        // Retorna el teléfono seleccionado
-        return phoneTable.getSelectionModel().getSelectedItem();
-    }
-
-     */
-
 
 }
 
