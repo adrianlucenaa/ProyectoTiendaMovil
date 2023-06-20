@@ -22,6 +22,7 @@ import java.util.List;
 
 public class PhoneController {
 
+    //Elementos de mi tabla
     @FXML
     private TableView<Phone> phoneTable;
 
@@ -39,7 +40,7 @@ public class PhoneController {
     private TableColumn<Phone, Double> priceColumn;
 
 
-
+    //Declaracion de mi text field
     @FXML
     private TextField nameField;
 
@@ -52,6 +53,7 @@ public class PhoneController {
     @FXML
     private TextField priceField;
 
+    //Los botones
     @FXML
     private Button addButton;
 
@@ -64,12 +66,15 @@ public class PhoneController {
     @FXML
     private Button backButton;
 
+    //Mi DAO referenciado
     private PhoneDAO phoneDAO;
 
     public PhoneController() {
         phoneDAO = new PhoneDAO();
     }
 
+
+    //Inicializacion de los metodos
     @FXML
     public void initialize() {
         // Configurar la tabla y cargar los datos de los Phone existentes en ella
@@ -77,6 +82,8 @@ public class PhoneController {
         loadPhoneData();
     }
 
+
+    //Metodo para añadir elemento a mi tabla
     @FXML
     void handleAddButton(ActionEvent event) {
         // Obtener los valores ingresados en los campos de texto
@@ -100,7 +107,7 @@ public class PhoneController {
             e.printStackTrace();
         }
     }
-
+    //Metodo para actualizar campos de mi tabla
     @FXML
     void handleUpdateButton(ActionEvent event) throws SQLException {
         // Obtener el Phone seleccionado en la tabla
@@ -127,7 +134,7 @@ public class PhoneController {
             clearFields();
         }
     }
-
+    //Metodo para eliminar campo de mi tabla
     @FXML
     void handleDeleteButton(ActionEvent event) {
         // Obtener el Phone seleccionado en la tabla
@@ -148,6 +155,7 @@ public class PhoneController {
         }
     }
 
+    //Metodo para configurar la tabla
     private void configureTable() {
         // Asignar las propiedades de las columnas a los atributos de la clase Phone
         PhoneNameColumn.setCellValueFactory(new PropertyValueFactory<>("PhoneName"));
@@ -159,6 +167,7 @@ public class PhoneController {
         phoneTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
+    //Metodos para cargar los elementos de mi tabla
     private void loadPhoneData() {
         try {
             // Obtener la lista de todos los Phone desde la base de datos
@@ -173,6 +182,7 @@ public class PhoneController {
         }
     }
 
+    //metodo para limpiar los text field
     private void clearFields() {
         // Limpiar los campos de texto
         nameField.clear();
@@ -181,6 +191,8 @@ public class PhoneController {
         priceField.clear();
     }
 
+
+    //metodo para volver a la vista anterior
     @FXML
     void handleBackButton(ActionEvent event) {
         try {
@@ -192,7 +204,7 @@ public class PhoneController {
         }
     }
 
-
+    //metodo para que oueda seleccionar un elemento de mi tabla
     @FXML
     private void seleccionarElemento(MouseEvent event) {
         // Obtener el Phone seleccionado en la tabla

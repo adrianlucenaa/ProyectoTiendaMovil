@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.BuyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="615.0" style="-fx-background-color: a1ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.BuyController">
    <children>
       <TableView fx:id="buysTable" layoutX="274.0" layoutY="12.0" onMouseClicked="#seleccionarElemento" prefHeight="213.0" prefWidth="314.0">
         <columns>
@@ -19,22 +19,26 @@
             <TableColumn fx:id="priceColumn" prefWidth="85.0" text="Precio" />
         </columns>
       </TableView>
-      <ImageView fitHeight="129.0" fitWidth="158.0" layoutX="-1.0">
+      <ImageView fitHeight="122.0" fitWidth="119.0" layoutX="22.0" layoutY="14.0">
          <image>
             <Image url="@../../../assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="phoneField" layoutX="42.0" layoutY="269.0" onAction="#seleccionarElemento" />
-      <TextField fx:id="customerField" layoutX="33.0" layoutY="331.0" onAction="#seleccionarElemento" />
-      <TextField fx:id="priceField" layoutX="218.0" layoutY="269.0" onAction="#seleccionarElemento" />
-      <Text layoutX="91.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
-      <Text layoutX="82.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer" />
-      <Text layoutX="276.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
-      <Button fx:id="deleteButton" layoutX="380.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete" />
-      <Button fx:id="addButton" layoutX="488.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" />
-      <Button fx:id="backButton" layoutX="380.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="51.0" text="Back" />
-      <TextField fx:id="searchField" layoutX="108.0" layoutY="155.0" />
-      <Text layoutX="137.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Por Brand" />
+      <TextField fx:id="phoneField" layoutX="70.0" layoutY="357.0" onAction="#seleccionarElemento" />
+      <TextField fx:id="customerField" layoutX="234.0" layoutY="357.0" onAction="#seleccionarElemento" />
+      <TextField fx:id="priceField" layoutX="234.0" layoutY="269.0" onAction="#seleccionarElemento" />
+      <Text layoutX="128.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+      <Text layoutX="283.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer" />
+      <Text layoutX="292.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
+      <Button fx:id="deleteButton" layoutX="446.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete" textFill="#f50101" />
+      <Button fx:id="addButton" layoutX="535.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" textFill="RED" />
+      <Button fx:id="backButton" layoutX="446.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="51.0" text="Back" textFill="RED" />
+      <TextField fx:id="searchField" layoutX="69.0" layoutY="155.0" />
+      <Text layoutX="81.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Phone Por Brand" />
       <ListView fx:id="phonesSearched" layoutX="57.0" layoutY="180.0" prefHeight="61.0" prefWidth="200.0" />
+      <ListView fx:id="searchCustomerList" layoutX="61.0" layoutY="294.0" prefHeight="40.0" prefWidth="160.0" />
+      <TextField fx:id="searchcustomerfield" layoutX="67.0" layoutY="269.0" />
+      <Text layoutX="66.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Customer Por Nombre" />
+      <Button fx:id="UpdateButton" layoutX="528.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleUpdateButton" text="Update" textFill="#f20000" />
    </children>
 </AnchorPane>

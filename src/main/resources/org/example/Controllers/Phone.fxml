@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: a1ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.PhoneController">
@@ -19,7 +20,7 @@
             <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
         </columns>
       </TableView>
-      <Text layoutX="93.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <Text layoutX="93.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
       <TextField fx:id="nameField" layoutX="34.0" layoutY="200.0" onAction="#seleccionarElemento" />
       <Text layoutX="93.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand" />
       <TextField fx:id="brandField" layoutX="34.0" layoutY="339.0" onAction="#seleccionarElemento" />
@@ -27,14 +28,15 @@
       <TextField fx:id="yearReleaseField" layoutX="34.0" layoutY="272.0" onAction="#seleccionarElemento" />
       <Text layoutX="259.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
       <TextField fx:id="priceField" layoutX="199.0" layoutY="339.0" onAction="#seleccionarElemento" />
-      <Button fx:id="addButton" layoutX="509.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" />
-      <Button fx:id="deleteButton" layoutX="398.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete" />
+      <Button fx:id="addButton" layoutX="509.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" textFill="RED" />
+      <Button fx:id="deleteButton" layoutX="398.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete" textFill="RED" />
       <ImageView fitHeight="148.0" fitWidth="168.0" layoutX="25.0" layoutY="6.0">
          <image>
             <Image url="@../../../assets/Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="updateButton" layoutX="500.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleUpdateButton" text="Update" />
-      <Button fx:id="backButton" layoutX="403.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+      <Button fx:id="updateButton" layoutX="500.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleUpdateButton" text="Update" textFill="RED" />
+      <Button fx:id="backButton" layoutX="403.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" textFill="#f50000" />
+      <Line endX="170.0" endY="8.0" layoutX="420.0" layoutY="264.0" startX="-206.0" startY="8.0" stroke="#e80808" />
    </children>
 </AnchorPane>

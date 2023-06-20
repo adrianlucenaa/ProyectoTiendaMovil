@@ -6,34 +6,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.LoginController">
+<AnchorPane prefHeight="386.0" prefWidth="623.0" style="-fx-background-color: a1ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.LoginController">
    <children>
-      <ImageView fx:id="imagenfondo" fitHeight="400.0" fitWidth="600.0">
-         <image>
-            <Image url="@../../../../../../../fondologin.jpg" />
-         </image>
-      </ImageView>
-      <Text layoutX="246.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, a tu lugar favorito para compra de moviles" textAlignment="JUSTIFY" textOrigin="CENTER" wrappingWidth="309.1171875">
-         <font>
-            <Font name="Engravers MT" size="15.0" />
-         </font></Text>
-      <HBox layoutX="199.0" layoutY="138.0" prefHeight="25.0" prefWidth="222.0" />
-      <Button layoutX="324.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToPrincipal" prefHeight="25.0" prefWidth="98.0" text="LOGIN" textFill="#fc1d1d">
-         <font>
-            <Font name="DejaVu Serif Bold" size="12.0" />
-         </font>
-      </Button>
-      <HBox layoutX="56.0" layoutY="266.0" prefHeight="17.0" prefWidth="137.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="8.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="Logo" fitHeight="150.0" fitWidth="208.0" layoutX="23.0" layoutY="14.0">
+      <ImageView fx:id="imagenfondo" fitHeight="141.0" fitWidth="187.0" layoutX="31.0" layoutY="22.0">
          <image>
             <Image url="@../../../assets/Logo.png" />
          </image>
       </ImageView>
+      <Text layoutX="245.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, a tu lugar favorito para compra de moviles" textAlignment="JUSTIFY" textOrigin="CENTER" wrappingWidth="309.1171875">
+         <font>
+            <Font name="Engravers MT" size="15.0" />
+         </font></Text>
+      <Button fx:id="LoginButton" layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToPrincipal" prefHeight="25.0" prefWidth="98.0" text="LOGIN" textFill="#fc1d1d">
+         <font>
+            <Font name="DejaVu Serif Bold" size="12.0" />
+         </font>
+      </Button>
       <PasswordField fx:id="contraseña" alignment="CENTER" layoutX="298.0" layoutY="234.0" prefHeight="25.0" prefWidth="149.0" />
       <Text layoutX="168.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
          <font>
@@ -46,10 +41,23 @@
             <Font name="Engravers MT" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="63.0" layoutY="355.0" mnemonicParsing="false" onAction="#switchToRegistro" text="Sign up" textFill="RED">
-         <font>
-            <Font name="DejaVu Serif Condensed Bold" size="13.0" />
-         </font>
-      </Button>
+      <Line endX="489.0" layoutX="121.0" layoutY="297.0" startX="-111.0">
+         <stroke>
+            <RadialGradient centerX="0.5552486187845304" centerY="0.490521327014218" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </stroke>
+      </Line>
    </children>
 </AnchorPane>
