@@ -1,27 +1,25 @@
 package org.example.Model.Domain;
 
+
 public class Phone {
     private int idPhone;
-    private String name;
+    private String PhoneName;
     private String brand;
-    private String yearrelease;
-
+    private int yearrelease;
     private double price;
 
-    public Phone(int idPhone, String name, String brand, String yearrelease, double precio) {
-        this.idPhone = idPhone;
-        this.name = name;
+    public Phone(String PhoneName, String brand, int yearrelease, double price) {
+        this.PhoneName = PhoneName;
         this.brand = brand;
         this.yearrelease = yearrelease;
-        this.price = precio;
+        this.price = price;
     }
 
     public Phone() {
-    this.idPhone=0;
-    this.name="";
-    this.brand="";
-    this.yearrelease="2023";
-    this.price=0.0;
+        this.PhoneName = "";
+        this.brand = "";
+        this.yearrelease = 2023;
+        this.price = 0.0;
     }
 
     public int getIdPhone() {
@@ -32,12 +30,12 @@ public class Phone {
         this.idPhone = idPhone;
     }
 
-    public String getName() {
-        return name;
+    public String getPhoneName() {
+        return PhoneName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhoneName(String PhoneName) {
+        this.PhoneName= PhoneName;
     }
 
     public String getBrand() {
@@ -48,11 +46,11 @@ public class Phone {
         this.brand = brand;
     }
 
-    public String getYearrelease() {
+    public int getYearrelease() {
         return yearrelease;
     }
 
-    public void setYearrelease(String yearrelease) {
+    public void setYearrelease(int yearrelease) {
         this.yearrelease = yearrelease;
     }
 
@@ -60,13 +58,19 @@ public class Phone {
         return price;
     }
 
-    public void setPrice(double precio) {
-        this.price = precio;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Phone [id=" + idPhone + ", brand=" + brand + ", name=" + name + ", price=" + price + "]";
+        return "Phone [id=" + idPhone + ", brand=" + brand + ", name=" + PhoneName + ", price=" + price + "]";
+    }
+
+    public double calculatePrice(double discountPercentage) {
+        double discount = price * discountPercentage;
+        double discountedPrice = price - discount;
+        return discountedPrice;
     }
 
 }

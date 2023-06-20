@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.BuyController">
+   <children>
+      <TableView fx:id="buysTable" layoutX="274.0" layoutY="12.0" onMouseClicked="#seleccionarElemento" prefHeight="213.0" prefWidth="314.0">
+        <columns>
+          <TableColumn fx:id="phoneColumn" prefWidth="111.0" text="Phone" />
+          <TableColumn fx:id="customerColumn" prefWidth="117.0" text="Customer" />
+            <TableColumn fx:id="priceColumn" prefWidth="85.0" text="Precio" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="129.0" fitWidth="158.0" layoutX="-1.0">
+         <image>
+            <Image url="@../../../assets/Logo.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="phoneField" layoutX="42.0" layoutY="269.0" onAction="#seleccionarElemento" />
+      <TextField fx:id="customerField" layoutX="33.0" layoutY="331.0" onAction="#seleccionarElemento" />
+      <TextField fx:id="priceField" layoutX="218.0" layoutY="269.0" onAction="#seleccionarElemento" />
+      <Text layoutX="91.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+      <Text layoutX="82.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer" />
+      <Text layoutX="276.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
+      <Button fx:id="deleteButton" layoutX="380.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete" />
+      <Button fx:id="addButton" layoutX="488.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" />
+      <Button fx:id="backButton" layoutX="380.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="51.0" text="Back" />
+      <TextField fx:id="searchField" layoutX="108.0" layoutY="155.0" />
+      <Text layoutX="137.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Por Brand" />
+      <ListView fx:id="phonesSearched" layoutX="57.0" layoutY="180.0" prefHeight="61.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

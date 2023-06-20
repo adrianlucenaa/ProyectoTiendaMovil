@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.util.List;
 
 
+/*
 public class TestBuysDAO {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/proyecto";
@@ -74,4 +75,4 @@ public class TestBuysDAO {
         }
     }
 }
-
+*/

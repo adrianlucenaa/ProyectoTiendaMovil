@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.RegistroController">
+   <children>
+      <HBox layoutX="58.0" layoutY="128.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="nametexto" layoutX="66.0" layoutY="184.0" prefHeight="25.0" prefWidth="156.0" />
+      <Button fx:id="button" layoutX="255.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToLogin" text="REGISTER" textFill="#ff1818">
+         <font>
+            <Font name="DejaVu Serif Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="telephonenumber" layoutX="379.0" layoutY="184.0" prefHeight="25.0" prefWidth="149.0" />
+      <HBox layoutX="95.0" layoutY="200.0" prefHeight="38.0" prefWidth="203.0" />
+      <TextField fx:id="mailtexto" layoutX="76.0" layoutY="272.0" prefHeight="25.0" prefWidth="156.0" />
+      <HBox layoutX="293.0" layoutY="188.0" prefHeight="19.0" prefWidth="117.0" />
+      <TextField fx:id="adrres" layoutX="366.0" layoutY="272.0" />
+      <Text layoutX="384.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adrress">
+         <font>
+            <Font name="Engravers MT" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="175.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fill in all fields to register">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="109.0" fitWidth="117.0" layoutX="37.0" layoutY="10.0">
+         <image>
+            <Image url="@../../../../../../../Logo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="318.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone Number">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="114.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MAIL">
+         <font>
+            <Font name="Engravers MT" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="86.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full name" wrappingWidth="136.5380859375">
+         <font>
+            <Font name="Engravers MT" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
