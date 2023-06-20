@@ -24,6 +24,8 @@ import java.util.List;
 
 public class CustomerController {
 
+    // Declaración de textfield y otro elemento.
+
     @FXML
     private TableView<Customer> customerTable;
 
@@ -53,6 +55,8 @@ public class CustomerController {
     @FXML
     private TextField addressField;
 
+    //Los botones
+
     @FXML
     private Button addButton;
 
@@ -65,12 +69,17 @@ public class CustomerController {
     @FXML
     private Button backButton;
 
+    //Referencia De Mi DAO
+
     private CustomerDAO customerDAO;
+
+
 
     public CustomerController() {
         customerDAO = new CustomerDAO();
     }
 
+    //Inicializa los metodos
     @FXML
     public void initialize() {
         // Configurar la tabla y cargar los datos de los Customer existentes en ella
@@ -78,6 +87,7 @@ public class CustomerController {
         loadCustomerData();
     }
 
+    //Logica Para Añadir Un elemento a la tabla
     @FXML
     void handleAddButton(ActionEvent event) {
         // Obtener los valores ingresados en los campos de texto
@@ -106,6 +116,7 @@ public class CustomerController {
         }
     }
 
+    //Metodo para eliminar un campo de la tabla
     @FXML
     void handleDeleteButton(ActionEvent event) {
         // Obtener el Customer seleccionado en la tabla
@@ -125,6 +136,7 @@ public class CustomerController {
         }
     }
 
+    //Configuracion de la tabla
     private void configureTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         mailColumn.setCellValueFactory(new PropertyValueFactory<>("mail"));
@@ -132,6 +144,7 @@ public class CustomerController {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
+    //Cargar los customer y sus datos en la tabla
     private void loadCustomerData() {
         try {
             List<Customer> customers = customerDAO.findAll();
@@ -141,7 +154,7 @@ public class CustomerController {
         }
     }
 
-
+    //Metodo para limpiar los text field
     private void clearFields() {
         // Limpiar los campos de texto después de agregar un Customer
         nameField.clear();
@@ -150,6 +163,7 @@ public class CustomerController {
         addressField.clear();
     }
 
+    //metodo para actualizar un campo de la tabla
     @FXML
     void handleUpdateButton(ActionEvent event) throws SQLException {
         // Obtener el Customer seleccionado en la tabla
@@ -177,6 +191,7 @@ public class CustomerController {
         }
     }
 
+    //logica para el boton de volver atras
     @FXML
     void handleBackButton(ActionEvent event) {
         try {
@@ -188,6 +203,7 @@ public class CustomerController {
         }
     }
 
+    //metodo para seleccionar un elemento de la tabla
     @FXML
     private void seleccionarElemento(MouseEvent event) {
         // Obtener el Customer seleccionado en la tabla
@@ -201,7 +217,7 @@ public class CustomerController {
             String mail = selectedCustomer.getMail();
             String address = selectedCustomer.getAddress();
 
-            // Actualizar los campos de texto
+            // Actualizar los campos de texto y rellenarlos
             nameField.setText(name);
             numberField.setText(number);
             mailField.setText(mail);

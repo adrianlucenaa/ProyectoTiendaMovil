@@ -181,10 +181,5 @@ public class PhoneDAO implements DAO<Phone> {
 
         return phones;
     }
-
-
-
-
-
 }
 

@@ -34,6 +34,8 @@ import java.util.List;
 
 
 public class BuyController {
+
+    // Declaración de textfield y otro elemento.
     @FXML
     private TextField searchField;
 
@@ -42,9 +44,6 @@ public class BuyController {
 
     @FXML
     private TableView<Buys> buysTable;
-
-
-
 
     @FXML
     private TableColumn<Buys, String> customerColumn;
@@ -64,9 +63,10 @@ public class BuyController {
     @FXML
     private TextField priceField;
 
+    //Los botones
+
     @FXML
     private Button backButton;
-
 
     @FXML
     private Button UpdateButton;
@@ -77,6 +77,8 @@ public class BuyController {
     @FXML
     private Button deleteButton;
 
+    //Mis Listas
+
     @FXML
     private ListView<Phone> phonesSearched;
 
@@ -84,7 +86,7 @@ public class BuyController {
     private  ListView<Customer> searchCustomerList;
 
 
-
+    // Declaración de los objetos DAO y otras variables
     private PhoneDAO phoneDAO;
 
     private CustomerDAO customerDAO;
@@ -92,6 +94,9 @@ public class BuyController {
     private BuysDAO buysDAO;
     private ObservableList<Buys> buysList;
 
+
+
+    // Método de inicialización
     @FXML
     public void initialize() {
         buysDAO = new BuysDAO();
@@ -101,15 +106,11 @@ public class BuyController {
         configureTable();
         loadBuysData();
 
-        //configurePhoneTable();
-
         configureSearch();
-
         configureSearchCustomer();
-
-
     }
 
+    // Método para añadir los campos de texto
     @FXML
     void handleAddButton() {
         String CustomerName = customerField.getText();
@@ -127,6 +128,7 @@ public class BuyController {
         }
     }
 
+    //Configuracion del escuchador de nuestros moviles
     private void configureSearch(){
         this.phonesSearched.visibleProperty().set(false);
         phonesSearched.getSelectionModel().selectedItemProperty().addListener(
@@ -159,7 +161,7 @@ public class BuyController {
 
         });
     }
-
+    //Configuracion del escuchador para buscar customer
     private void configureSearchCustomer() {
         this.searchCustomerList.setVisible(false);
         searchCustomerList.getSelectionModel().selectedItemProperty().addListener(
@@ -192,6 +194,7 @@ public class BuyController {
         });
     }
 
+    //Metodo para eliminar alguna campo de la tabla
     @FXML
     void handleDeleteButton() {
         Buys selectedBuys = buysTable.getSelectionModel().getSelectedItem();
@@ -206,6 +209,7 @@ public class BuyController {
         }
     }
 
+    // Método para manejar el evento del botón "Volver"
     @FXML
     void handleBackButton(ActionEvent event) {
         try {
@@ -222,7 +226,7 @@ public class BuyController {
 
 
 
-
+    // Método para configurar la tabla de compras
     private void configureTable() {
         customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneName"));
@@ -232,7 +236,7 @@ public class BuyController {
         phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
     }
-
+    //Metodo para cargar los datos en la tabla
     private void loadBuysData() {
         try {
             buysList = FXCollections.observableArrayList(buysDAO.findAll());
@@ -242,12 +246,15 @@ public class BuyController {
         }
     }
 
+    //Metodo para limpiar los textField
     private void clearFields() {
         customerField.clear();
         phoneField.clear();
         priceField.clear();
     }
 
+
+    //Metodo para seleecionar un elemento de la tabla
     @FXML
     private void seleccionarElemento(MouseEvent event) {
         // Obtener el Buy seleccionado en la tabla
@@ -267,22 +274,7 @@ public class BuyController {
         }
     }
 
-    private void updateBuysTable(List<Phone> phonesByBrand) {
-        buysList.clear();
-        for (Phone phone : phonesByBrand) {
-            buysList.add(new Buys(phone.getBrand(), phone.getPhoneName(), phone.getPrice()));
-        }
-    }
-
-    private void loadPhonesData() {
-        try {
-            List<Phone> allPhones = phoneDAO.findAll();  // Obtener todos los teléfonos
-            updateBuysTable(allPhones);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    //Metodo para Actualizar un campo de mi tabla
     @FXML
     void handleUpdateButton(ActionEvent event) {
         // Obtener la compra seleccionada en la tabla

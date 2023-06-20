@@ -3,7 +3,7 @@ package org.example.Model.Domain;
 public class Buys {
 
 
-
+    //Declarando Atributos
     private int IdBuys;
 
     private String CustomerName;
@@ -13,6 +13,7 @@ public class Buys {
 
     private double price;
 
+    //Constructores
     public Buys() {
 
     }
@@ -22,7 +23,7 @@ public class Buys {
         PhoneName = phoneName;
         this.price = price;
     }
-
+ //Getters y setters
     public String getCustomerName() {
         return CustomerName;
     }
