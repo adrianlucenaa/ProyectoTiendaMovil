@@ -13,7 +13,7 @@
    <children>
       <TableView fx:id="phoneTable" layoutX="259.0" layoutY="33.0" onMouseClicked="#seleccionarElemento" prefHeight="230.0" prefWidth="303.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="PhoneNameColumn" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="brandColumn" prefWidth="75.0" text="Brand" />
             <TableColumn fx:id="yearColumn" prefWidth="75.0" text="YearRealease" />
             <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />

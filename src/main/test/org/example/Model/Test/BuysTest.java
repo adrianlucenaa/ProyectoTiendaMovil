@@ -1,4 +1,4 @@
-package org.example.Model.Domain;
+package org.example.Model.Test;
 
 import org.junit.jupiter.api.Test;
 

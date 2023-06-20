@@ -37,7 +37,7 @@ public class PhoneDAO implements DAO<Phone> {
                 while (res.next()) {
                     Phone phone = new Phone();
                     phone.setIdPhone(res.getInt("idPhone"));
-                    phone.setPhoneName(res.getString("name"));
+                    phone.setPhoneName(res.getString("PhoneName"));
                     phone.setBrand(res.getString("brand"));
                     phone.setYearrelease(res.getInt("yearrelease"));
                     phone.setPrice(res.getDouble("price"));
@@ -59,7 +59,7 @@ public class PhoneDAO implements DAO<Phone> {
                     Phone phone = new Phone();
                     phone.setIdPhone(res.getInt("idPhone"));
                     phone.setBrand(res.getString("brand"));
-                    phone.setPhoneName(res.getString("name"));
+                    phone.setPhoneName(res.getString("PhoneName"));
                     phone.setPrice(res.getDouble("price"));
                     phone.setYearrelease(res.getInt("yearrelease"));
                     result = phone;
@@ -76,7 +76,7 @@ public class PhoneDAO implements DAO<Phone> {
             if (phone == null) {
                 // INSERT
                 try (PreparedStatement pst = this.conn.prepareStatement(INSERT)) {
-                    pst.setString(1, entity.getName());
+                    pst.setString(1, entity.getPhoneName());
                     pst.setString(2, entity.getBrand());
                     pst.setInt(3, entity.getYearrelease());
                     pst.setDouble(4, entity.getPrice());
@@ -85,7 +85,7 @@ public class PhoneDAO implements DAO<Phone> {
             } else {
                 // UPDATE
                 try (PreparedStatement pst = this.conn.prepareStatement(UPDATE)) {
-                    pst.setString(1, entity.getName());
+                    pst.setString(1, entity.getPhoneName());
                     pst.setString(2, entity.getBrand());
                     pst.setInt(3, entity.getYearrelease());
                     pst.setDouble(4, entity.getPrice());
@@ -116,7 +116,7 @@ public class PhoneDAO implements DAO<Phone> {
     public void update(Phone selectedPhone) throws SQLException {
         if (selectedPhone != null) {
             try (PreparedStatement pst = this.conn.prepareStatement(UPDATE)) {
-                pst.setString(1, selectedPhone.getName());
+                pst.setString(1, selectedPhone.getPhoneName());
                 pst.setString(2, selectedPhone.getBrand());
                 pst.setInt(3, selectedPhone.getYearrelease());
                 pst.setDouble(4, selectedPhone.getPrice());
@@ -127,10 +127,9 @@ public class PhoneDAO implements DAO<Phone> {
     }
 
 
-
     public List<Phone> search(String searchText) throws SQLException {
         List<Phone> phoneList = new ArrayList<>();
-        String SEARCH_QUERY = "SELECT * FROM Phone WHERE id_phone = ? OR name LIKE ? OR brand LIKE ?";
+        String SEARCH_QUERY = "SELECT * FROM Phone WHERE IdPhone = ? OR PhoneName LIKE ? OR brand LIKE ?";
         try (PreparedStatement ps = conn.prepareStatement(SEARCH_QUERY)) {
             int searchId;
             try {
@@ -145,12 +144,12 @@ public class PhoneDAO implements DAO<Phone> {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Phone phone = new Phone(
-                            rs.getString("name"),
+                            rs.getString("PhoneName"),
                             rs.getString("brand"),
                             rs.getInt("yearrelease"),
                             rs.getDouble("price")
                     );
-                    phone.setIdPhone(rs.getInt("id_phone"));
+                    phone.setIdPhone(rs.getInt("IdPhone"));
                     phoneList.add(phone);
                 }
             }
@@ -159,6 +158,33 @@ public class PhoneDAO implements DAO<Phone> {
     }
 
 
-    // ...
+    public List<Phone> searchByBrand(String brand) throws SQLException {
+        List<Phone> phones = new ArrayList<>();
+
+        String query = "SELECT * FROM Phone WHERE brand LIKE ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, "%" + brand + "%");
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String phoneBrand = resultSet.getString("brand");
+                    String phoneName = resultSet.getString("PhoneName");
+                    int yearRelease = resultSet.getInt("yearrelease");
+                    double price = resultSet.getDouble("price");
+
+                    Phone phone = new Phone(phoneBrand, phoneName,yearRelease, price);
+                    phones.add(phone);
+                }
+            }
+        }
+
+        return phones;
+    }
+
+
+
+
+
 }
 

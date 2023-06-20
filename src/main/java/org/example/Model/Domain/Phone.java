@@ -30,7 +30,7 @@ public class Phone {
         this.idPhone = idPhone;
     }
 
-    public String getName() {
+    public String getPhoneName() {
         return PhoneName;
     }
 

@@ -27,7 +27,7 @@ public class PhoneController {
 
 
     @FXML
-    private TableColumn<Phone, String> nameColumn;
+    private TableColumn<Phone, String> PhoneNameColumn;
 
     @FXML
     private TableColumn<Phone, String> brandColumn;
@@ -80,13 +80,13 @@ public class PhoneController {
     @FXML
     void handleAddButton(ActionEvent event) {
         // Obtener los valores ingresados en los campos de texto
-        String name = nameField.getText();
+        String PhoneName = nameField.getText();
         String brand = brandField.getText();
         int yearRelease = Integer.parseInt(yearReleaseField.getText());
         double price = Double.parseDouble(priceField.getText());
 
         // Crear un nuevo objeto Phone
-        Phone phone = new Phone(name, brand, yearRelease, price);
+        Phone phone = new Phone(PhoneName, brand, yearRelease, price);
 
         try {
             // Guardar el nuevo Phone en la base de datos
@@ -108,13 +108,13 @@ public class PhoneController {
 
         if (selectedPhone != null) {
             // Obtener los nuevos valores ingresados en los campos de texto
-            String name = nameField.getText();
+            String PhoneName = nameField.getText();
             String brand = brandField.getText();
             int yearRelease = Integer.parseInt(yearReleaseField.getText());
             double price = Double.parseDouble(priceField.getText());
 
             // Actualizar los valores del teléfono seleccionado
-            selectedPhone.setPhoneName(name);
+            selectedPhone.setPhoneName(PhoneName);
             selectedPhone.setBrand(brand);
             selectedPhone.setYearrelease(yearRelease);
             selectedPhone.setPrice(price);
@@ -150,7 +150,7 @@ public class PhoneController {
 
     private void configureTable() {
         // Asignar las propiedades de las columnas a los atributos de la clase Phone
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        PhoneNameColumn.setCellValueFactory(new PropertyValueFactory<>("PhoneName"));
         brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("yearrelease"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -201,13 +201,13 @@ public class PhoneController {
         // Verificar si hay un Phone seleccionado
         if (selectedPhone != null) {
             // Obtener los datos del Phone seleccionado
-            String name = selectedPhone.getName();
+            String PhoneName = selectedPhone.getPhoneName();
             String brand = selectedPhone.getBrand();
             int yearRelease = selectedPhone.getYearrelease();
             double price = selectedPhone.getPrice();
 
             // Actualizar los campos de texto
-            nameField.setText(name);
+            nameField.setText(PhoneName);
             brandField.setText(brand);
             yearReleaseField.setText(String.valueOf(yearRelease));
             priceField.setText(String.valueOf(price));

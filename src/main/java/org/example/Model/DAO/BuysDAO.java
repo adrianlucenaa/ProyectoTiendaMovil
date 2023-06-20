@@ -14,12 +14,8 @@ import java.util.List;
 public class BuysDAO implements DAO<Buys> {
     private final static String FINDALL = "SELECT * FROM buys";
     private final static String FINDBYID = "SELECT * FROM buys WHERE idBuys=?";
-    private final static String INSERT = "INSERT INTO buys (CustomerName, PhoneName, price) " +
-            "SELECT c.customerName, p.phoneName, ? " +
-            "FROM customer c " +
-            "JOIN phone p ON c.idCustomer = p.customerId " +
-            "WHERE c.customerName = ? AND p.phoneName = ?";
-    private final static String UPDATE = "UPDATE buys SET CustomerName=?, PhoneName=?,  price=? WHERE idBuys=?";
+    private final static String INSERT = "INSERT INTO buys (CustomerName, PhoneName, Price) VALUES (?, ?, ?)";
+    private final static String UPDATE = "UPDATE buys SET CustomerName=?, PhoneName=?, Price=? WHERE idBuys=?";
     private final static String DELETE = "DELETE FROM buys WHERE idBuys=?";
 
     private Connection conn;
@@ -39,8 +35,8 @@ public class BuysDAO implements DAO<Buys> {
             try (ResultSet res = pst.executeQuery()) {
                 while (res.next()) {
                     Buys buys = new Buys();
-                    buys.setIdBuys(res.getInt("IdBuys"));
-                    buys.setPrice(res.getDouble("price"));
+                    buys.setIdBuys(res.getInt("idBuys"));
+                    buys.setPrice(res.getDouble("Price"));
                     buys.setCustomerName(res.getString("CustomerName"));
                     buys.setPhoneName(res.getString("PhoneName"));
                     result.add(buys);
@@ -58,10 +54,10 @@ public class BuysDAO implements DAO<Buys> {
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
                     Buys buys = new Buys();
-                    buys.setIdBuys(res.getInt("IdBuys"));
+                    buys.setIdBuys(res.getInt("idBuys"));
                     buys.setCustomerName(res.getString("CustomerName"));
                     buys.setPhoneName(res.getString("PhoneName"));
-                    buys.setPrice(res.getDouble("price"));
+                    buys.setPrice(res.getDouble("Price"));
                     result = buys;
                 }
             }
@@ -70,7 +66,7 @@ public class BuysDAO implements DAO<Buys> {
     }
 
     @Override
-    public  Buys save(Buys entity) throws SQLException {
+    public Buys save(Buys entity) throws SQLException {
         if (entity != null) {
             Buys buys = findById(String.valueOf(entity.getIdBuys()));
             if (buys == null) {
@@ -96,6 +92,7 @@ public class BuysDAO implements DAO<Buys> {
         return null;
     }
 
+
     @Override
     public void delete(Buys entity) throws SQLException {
         if (entity != null) {
@@ -108,12 +105,13 @@ public class BuysDAO implements DAO<Buys> {
 
     @Override
     public void close() throws Exception {
-
+        if (conn != null) {
+            conn.close();
+        }
     }
 
-
-
-    public List<Buys> searchByPhoneBrand(String brand) throws SQLException {
+    /*
+    public List<Buys> searchByPhoneBrand(Phone brand) throws SQLException {
         List<Buys> result = new ArrayList<>();
         String query = "SELECT * FROM buys b JOIN phone p ON b.PhoneName = p.PhoneName WHERE LOWER(p.brand) LIKE ?";
         try (PreparedStatement pst = this.conn.prepareStatement(query)) {
@@ -131,8 +129,35 @@ public class BuysDAO implements DAO<Buys> {
         }
         return result;
     }
+  */
 
-
-
+    public List<Phone> searchPhones(String searchText) throws SQLException {
+        List<Phone> phoneList = new ArrayList<>();
+        String SEARCH_QUERY = "SELECT id_phone, brand, PhoneName, price FROM Phone " +
+                "WHERE id_phone = ? OR brand LIKE ? OR PhoneName LIKE ?";
+        try (PreparedStatement ps = conn.prepareStatement(SEARCH_QUERY)) {
+            int searchId;
+            try {
+                searchId = Integer.parseInt(searchText);
+            } catch (NumberFormatException e) {
+                searchId = -1; // Valor inválido para el ID
+            }
+            ps.setInt(1, searchId);
+            String searchPattern = "%" + searchText + "%";
+            ps.setString(2, searchPattern);
+            ps.setString(3, searchPattern);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Phone phone = new Phone();
+                    phone.setIdPhone(rs.getInt("id_phone"));
+                    phone.setBrand(rs.getString("brand"));
+                    phone.setPhoneName(rs.getString("model"));
+                    phone.setPrice(rs.getDouble("price"));
+                    phoneList.add(phone);
+                }
+            }
+        }
+        return phoneList;
+    }
 
 }
