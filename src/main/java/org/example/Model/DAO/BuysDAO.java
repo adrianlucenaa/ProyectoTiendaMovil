@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuysDAO implements DAO<Buys> {
-    // Consultas para realizar en la base de datos
+    /**
+     * Consulatas a realizar en la base de datos
+     */
 
     // Consulta para buscar todas las compras
     private final static String FINDALL = "SELECT * FROM buys";
@@ -26,8 +28,15 @@ public class BuysDAO implements DAO<Buys> {
     private final static String DELETE = "DELETE FROM buys WHERE idBuys=?";
 
     // Conexión a la base de datos
+    /**
+     * Conexion a la base de datos
+     */
     private Connection conn;
 
+    /**
+     * Conectar DaO con mi SQL
+     * @param conn
+     */
     public BuysDAO(Connection conn) {
         this.conn = conn;
     }
@@ -36,7 +45,12 @@ public class BuysDAO implements DAO<Buys> {
         this.conn = ConnectionMySQL.getConnect();
     }
 
-    // Implementación del método para buscar todas las compras
+    /**
+     * Implementación del método para buscar todas las compras
+     * @return
+     * @throws SQLException
+     */
+
     @Override
     public List<Buys> findAll() throws SQLException {
         // Lista para almacenar las compras encontradas
@@ -57,7 +71,12 @@ public class BuysDAO implements DAO<Buys> {
         return result;
     }
 
-    // Implementación del método para buscar una compra por su ID
+    /**
+     * // Implementación del método para buscar una compra por su ID
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Buys findById(String id) throws SQLException {
         Buys result = null;
@@ -78,7 +97,13 @@ public class BuysDAO implements DAO<Buys> {
         return result;
     }
 
-    // Implementación del método para guardar una compra
+    /**
+     * // Implementación del método para guardar una compra
+     * @param entity
+     * @return
+     * @throws SQLException
+     */
+
     @Override
     public Buys save(Buys entity) throws SQLException {
         if (entity != null) {
@@ -107,6 +132,12 @@ public class BuysDAO implements DAO<Buys> {
         return null;
     }
 
+    /**
+     * // Implementación del método para eliminar una compra
+     * @param entity
+     * @throws SQLException
+     */
+
     // Implementación del método para eliminar una compra
     @Override
     public void delete(Buys entity) throws SQLException {
@@ -118,7 +149,11 @@ public class BuysDAO implements DAO<Buys> {
         }
     }
 
-    // Implementación del método para cerrar la conexión a la base de datos
+    /**
+     * Implementación del método para cerrar la conexión a la base de datos
+     * @throws Exception
+     */
+
     @Override
     public void close() throws Exception {
         if (conn != null) {
@@ -126,9 +161,13 @@ public class BuysDAO implements DAO<Buys> {
         }
     }
 
-    // Otros métodos adicionales
 
-    // Método para buscar teléfonos según un texto de búsqueda
+    /**
+     * // Método para buscar teléfonos según un texto de búsqueda
+     * @param searchText
+     * @return
+     * @throws SQLException
+     */
     public List<Phone> searchPhones(String searchText) throws SQLException {
         // Lista para almacenar los teléfonos encontrados
         List<Phone> phoneList = new ArrayList<>();
@@ -160,7 +199,12 @@ public class BuysDAO implements DAO<Buys> {
         return phoneList;
     }
 
-    // Método para actualizar una compra
+    /**
+     * // Método para actualizar una compra
+     * @param selectedBuys
+     * @throws SQLException
+     */
+
     public void update(Buys selectedBuys) throws SQLException {
         if (selectedBuys != null) {
             String UPDATE_QUERY = "UPDATE Buys SET CustomerName = ?, PhoneName = ?, price = ? WHERE IdBuys = ?";

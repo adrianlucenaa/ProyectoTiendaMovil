@@ -23,6 +23,10 @@ public class LoginController {
     @FXML
     private Button LoginButton;
 
+    /**
+     * Logica boton login
+     * @param event
+     */
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         // Puedes acceder a los valores de usuario y contraseña usando los métodos getText()
@@ -39,6 +43,11 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * metodo que te lleva a principal fxml
+     * @throws IOException
+     */
 
     //metodo que te lleva a principal fxml
     @FXML

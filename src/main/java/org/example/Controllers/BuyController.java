@@ -90,7 +90,6 @@ public class BuyController {
     private PhoneDAO phoneDAO;
 
     private CustomerDAO customerDAO;
-
     private BuysDAO buysDAO;
     private ObservableList<Buys> buysList;
 
@@ -109,24 +108,36 @@ public class BuyController {
         configureSearch();
         configureSearchCustomer();
     }
-
-    // Método para añadir los campos de texto
+    /**
+     * Método para añadir los campos de texto.
+     */
     @FXML
     void handleAddButton() {
-        String CustomerName = customerField.getText();
-        String PhoneName = phoneField.getText();
-        double price = Double.parseDouble(priceField.getText());
+        // Obtener los valores de los campos de texto
+        String CustomerName = customerField.getText();  // Obtener el nombre del cliente ingresado en el campo de texto
+        String PhoneName = phoneField.getText();  // Obtener el número de teléfono ingresado en el campo de texto
+        double price = Double.parseDouble(priceField.getText());  // Obtener el precio ingresado en el campo de texto y convertirlo a un valor numérico (double)
 
-        Buys buys = new Buys(CustomerName, PhoneName, price);
+        // Crear una instancia de Buys con los valores obtenidos
+        Buys buys = new Buys(CustomerName, PhoneName, price);  // Crear una nueva instancia de Buys con el nombre del cliente, número de teléfono y precio
 
         try {
-            buysDAO.save(buys);
-            loadBuysData();
-            clearFields();
+            // Guardar la instancia de Buys utilizando buysDAO
+            buysDAO.save(buys);  // Guardar la instancia de Buys utilizando el objeto buysDAO, que se asume que tiene un método save() para realizar la operación de guardado
+
+            // Cargar nuevamente los datos de compras
+            loadBuysData();  // cargar nuevamente los datos de compras, posiblemente para actualizar la vista de la interfaz de usuario
+
+            // Limpiar los campos de texto
+            clearFields();  //  limpiar los campos de texto y dejarlos vacíos para una nueva entrada de datos
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // Imprimir la traza de la excepción en caso de que ocurra una SQLException durante el proceso de guardado
         }
     }
+
+    /**
+     * Configuracion del escuchador de nuestros moviles
+     */
 
     //Configuracion del escuchador de nuestros moviles
     private void configureSearch(){
@@ -161,6 +172,10 @@ public class BuyController {
 
         });
     }
+
+    /**
+     * Configuracion del escuchador para buscar customer
+     */
     //Configuracion del escuchador para buscar customer
     private void configureSearchCustomer() {
         this.searchCustomerList.setVisible(false);
@@ -194,6 +209,9 @@ public class BuyController {
         });
     }
 
+    /**
+     * Metdodo para limpiar compos de la tabla
+     */
     //Metodo para eliminar alguna campo de la tabla
     @FXML
     void handleDeleteButton() {
@@ -209,6 +227,10 @@ public class BuyController {
         }
     }
 
+    /**
+     * / Método para manejar el evento del botón "Volver"
+     * @param event
+     */
     // Método para manejar el evento del botón "Volver"
     @FXML
     void handleBackButton(ActionEvent event) {
@@ -222,10 +244,9 @@ public class BuyController {
     }
 
 
-
-
-
-
+    /**
+     * Método para configurar la tabla de compras
+     */
     // Método para configurar la tabla de compras
     private void configureTable() {
         customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -236,6 +257,10 @@ public class BuyController {
         phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
     }
+
+    /**
+     * Metdo de carga de datos de la tabla
+     */
     //Metodo para cargar los datos en la tabla
     private void loadBuysData() {
         try {
@@ -246,6 +271,9 @@ public class BuyController {
         }
     }
 
+    /**
+     * Metodo para limpiar los textFie
+     */
     //Metodo para limpiar los textField
     private void clearFields() {
         customerField.clear();
@@ -253,7 +281,10 @@ public class BuyController {
         priceField.clear();
     }
 
-
+    /**
+     * Metodo para selewcionar un elemento de la tabla
+     * @param event
+     */
     //Metodo para seleecionar un elemento de la tabla
     @FXML
     private void seleccionarElemento(MouseEvent event) {
@@ -274,6 +305,10 @@ public class BuyController {
         }
     }
 
+    /**
+     * Actualizar campo de mi tabla
+     * @param event
+     */
     //Metodo para Actualizar un campo de mi tabla
     @FXML
     void handleUpdateButton(ActionEvent event) {

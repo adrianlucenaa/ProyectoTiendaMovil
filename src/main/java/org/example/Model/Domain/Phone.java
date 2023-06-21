@@ -3,7 +3,9 @@ package org.example.Model.Domain;
 
 public class Phone {
 
-    //Declaracion atributos
+    /**
+     * //Declaracion atributoss
+     */
     private int idPhone;
     private String PhoneName;
     private String brand;
@@ -11,7 +13,12 @@ public class Phone {
     private double price;
 
 
-    //Constructores
+    /** constructores
+     * @param PhoneName
+     * @param brand
+     * @param yearrelease
+     * @param price
+     */
     public Phone(String PhoneName, String brand, int yearrelease, double price) {
         this.PhoneName = PhoneName;
         this.brand = brand;
@@ -25,7 +32,11 @@ public class Phone {
         this.yearrelease = 2023;
         this.price = 0.0;
     }
-    // Getters y Setters
+
+    /**
+     * // Getters y Setters
+     * @return
+     */
     public int getIdPhone() {
         return idPhone;
     }

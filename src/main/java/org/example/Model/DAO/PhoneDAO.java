@@ -13,14 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneDAO implements DAO<Phone> {
+    /**
+     * Consultas a reliazar en la base de datos
+     */
 
     private final static String FINDBYID = "SELECT * FROM phone WHERE idPhone=?";
     private final static String INSERT = "INSERT INTO phone ( PhoneName, brand, yearrelease, price) VALUES ( ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE phone SET PhoneName=?, brand=?, yearrelease=?, price=? WHERE idPhone=?";
     private final static String DELETE = "DELETE FROM phone WHERE idPhone=?";
 
+    /**
+     * Conexion a la base datos
+     */
     private Connection conn;
 
+    /**
+     * Conectando el DAO a la base datos
+     * @param conn
+     */
     public PhoneDAO(Connection conn) {
         this.conn = conn;
     }
@@ -29,6 +39,11 @@ public class PhoneDAO implements DAO<Phone> {
         this.conn = ConnectionMySQL.getConnect();
     }
 
+    /**
+     * Implementación del método para buscar todos los moviles
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Phone> findAll() throws SQLException {
         List<Phone> result = new ArrayList<>();
@@ -49,6 +64,12 @@ public class PhoneDAO implements DAO<Phone> {
     }
 
 
+    /**
+     * Implementación del método para buscar un cliente por su ID
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Phone findById(String id) throws SQLException {
         Phone result = null;
@@ -69,6 +90,12 @@ public class PhoneDAO implements DAO<Phone> {
         return result;
     }
 
+    /**
+     * Metodo para guardar un dato de la tabla
+     * @param entity
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Phone save(Phone entity) throws SQLException {
         if (entity != null) {
@@ -98,6 +125,11 @@ public class PhoneDAO implements DAO<Phone> {
         return null;
     }
 
+    /**
+     * Metodo para eliminar un movil
+     * @param entity
+     * @throws SQLException
+     */
     @Override
     public void delete(Phone entity) throws SQLException {
         if (entity != null) {
@@ -108,11 +140,20 @@ public class PhoneDAO implements DAO<Phone> {
         }
     }
 
+    /**
+     * Implementación del método para cerrar la conexión a la base de datos
+     * @throws Exception
+     */
     @Override
     public void close() throws Exception {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * Metodo Actualiza EL movil
+     * @param selectedPhone
+     * @throws SQLException
+     */
     public void update(Phone selectedPhone) throws SQLException {
         if (selectedPhone != null) {
             try (PreparedStatement pst = this.conn.prepareStatement(UPDATE)) {
@@ -126,7 +167,12 @@ public class PhoneDAO implements DAO<Phone> {
         }
     }
 
-
+    /**
+     * Implatacion del metodo para que me busque un movil por marca en mi vusta Buys
+     * @param searchText
+     * @return
+     * @throws SQLException
+     */
     public List<Phone> search(String searchText) throws SQLException {
         List<Phone> phoneList = new ArrayList<>();
         String SEARCH_QUERY = "SELECT * FROM Phone WHERE IdPhone = ? OR PhoneName LIKE ? OR brand LIKE ?";
