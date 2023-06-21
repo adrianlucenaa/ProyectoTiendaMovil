@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO implements DAO<Customer> {
-    // Consultas para realizar en la base de datos
 
+
+    /**
+     * // Consultas para realizar en la base de datos
+     */
     // Consulta para buscar todos los clientes
     private final static String FINDALL = "SELECT * FROM customer";
     // Consulta para buscar un cliente por su ID
@@ -25,8 +28,15 @@ public class CustomerDAO implements DAO<Customer> {
     // Consulta para eliminar un cliente
     private final static String DELETE = "DELETE FROM customer WHERE IdCustomer=?";
 
-    // Conexión a la base de datos
+    /**
+     * / Conexión a la base de datos
+     */
     private Connection conn;
+
+    /**
+     * Conecta los dao a mi base de datos
+     * @param conn
+     */
 
     public CustomerDAO(Connection conn) {
         this.conn = conn;
@@ -36,7 +46,11 @@ public class CustomerDAO implements DAO<Customer> {
         this.conn = ConnectionMySQL.getConnect();
     }
 
-    // Implementación del método para buscar todos los clientes
+    /**
+     * // Implementación del método para buscar todos los clientes
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Customer> findAll() throws SQLException {
         // Lista para almacenar los clientes encontrados
@@ -58,7 +72,13 @@ public class CustomerDAO implements DAO<Customer> {
         return result;
     }
 
-    // Implementación del método para buscar un cliente por su ID
+    /**
+     * // Implementación del método para buscar un cliente por su ID
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+
     @Override
     public Customer findById(String id) throws SQLException {
         Customer result = null;
@@ -80,7 +100,12 @@ public class CustomerDAO implements DAO<Customer> {
         return result;
     }
 
-    // Implementación del método para guardar un cliente
+    /**
+     * // Implementación del método para guardar un cliente
+     * @param entity
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Customer save(Customer entity) throws SQLException {
         if (entity != null) {
@@ -111,7 +136,11 @@ public class CustomerDAO implements DAO<Customer> {
         return null;
     }
 
-    // Implementación del método para eliminar un cliente
+    /**
+     * // Implementación del método para eliminar un cliente
+     * @param entity
+     * @throws SQLException
+     */
     @Override
     public void delete(Customer entity) throws SQLException {
         if (entity != null) {
@@ -122,7 +151,10 @@ public class CustomerDAO implements DAO<Customer> {
         }
     }
 
-    // Implementación del método para cerrar la conexión a la base de datos
+    /**
+     * // Implementación del método para cerrar la conexión a la base de datos
+     * @throws Exception
+     */
     @Override
     public void close() throws Exception {
         if (conn != null) {
@@ -130,7 +162,11 @@ public class CustomerDAO implements DAO<Customer> {
         }
     }
 
-    // Método para actualizar un cliente
+    /**
+     * // Método para actualizar un cliente
+     * @param selectedCustomer
+     * @throws SQLException
+     */
     public void update(Customer selectedCustomer) throws SQLException {
         if (selectedCustomer != null) {
             try (PreparedStatement pst = this.conn.prepareStatement(UPDATE)) {
@@ -144,7 +180,12 @@ public class CustomerDAO implements DAO<Customer> {
         }
     }
 
-    // Método para buscar clientes según un texto de búsqueda
+    /**
+     * // Método para buscar clientes según un texto de búsqueda
+     * @param searchText
+     * @return
+     * @throws SQLException
+     */
     public List<Customer> searchCustomer(String searchText) throws SQLException {
         // Lista para almacenar los clientes encontrados
         List<Customer> customerList = new ArrayList<>();

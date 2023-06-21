@@ -26,6 +26,9 @@ public class CustomerController {
 
     // Declaración de textfield y otro elemento.
 
+    /**
+     * Declaración de textfield y otro elemento.
+     */
     @FXML
     private TableView<Customer> customerTable;
 
@@ -79,6 +82,9 @@ public class CustomerController {
         customerDAO = new CustomerDAO();
     }
 
+    /**
+     * Inicializa los metdos
+     */
     //Inicializa los metodos
     @FXML
     public void initialize() {
@@ -87,7 +93,11 @@ public class CustomerController {
         loadCustomerData();
     }
 
-    //Logica Para Añadir Un elemento a la tabla
+    /**
+     * Declaración de textfield y otro elemento.
+     * @param event
+     */
+    //Declaración de textfield y otro elemento.
     @FXML
     void handleAddButton(ActionEvent event) {
         // Obtener los valores ingresados en los campos de texto
@@ -116,6 +126,10 @@ public class CustomerController {
         }
     }
 
+    /**
+     * Metodo para eliminar un campo de la tabla
+     * @param event
+     */
     //Metodo para eliminar un campo de la tabla
     @FXML
     void handleDeleteButton(ActionEvent event) {
@@ -136,6 +150,9 @@ public class CustomerController {
         }
     }
 
+    /**
+     * /Configuracion de la tabla
+     */
     //Configuracion de la tabla
     private void configureTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -144,6 +161,9 @@ public class CustomerController {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
+    /**
+     * //Cargar los customer y sus datos en la tabla
+     */
     //Cargar los customer y sus datos en la tabla
     private void loadCustomerData() {
         try {
@@ -154,6 +174,9 @@ public class CustomerController {
         }
     }
 
+    /**
+     * Metodo para limpiar los text field
+     */
     //Metodo para limpiar los text field
     private void clearFields() {
         // Limpiar los campos de texto después de agregar un Customer
@@ -163,6 +186,11 @@ public class CustomerController {
         addressField.clear();
     }
 
+    /**
+     * metodo para actualizar un campo de la tabla
+     * @param event
+     * @throws SQLException
+     */
     //metodo para actualizar un campo de la tabla
     @FXML
     void handleUpdateButton(ActionEvent event) throws SQLException {
@@ -191,6 +219,10 @@ public class CustomerController {
         }
     }
 
+    /**
+     * logica para el boton de volver atras
+     * @param event
+     */
     //logica para el boton de volver atras
     @FXML
     void handleBackButton(ActionEvent event) {
@@ -203,6 +235,10 @@ public class CustomerController {
         }
     }
 
+    /**
+     * metodo para seleccionar un elemento de la tabla
+     * @param event
+     */
     //metodo para seleccionar un elemento de la tabla
     @FXML
     private void seleccionarElemento(MouseEvent event) {

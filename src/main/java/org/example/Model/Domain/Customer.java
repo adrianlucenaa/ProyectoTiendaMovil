@@ -2,7 +2,9 @@ package org.example.Model.Domain;
 
 public class Customer {
 
-    //Declaracion Atributos
+    /**
+     * //Declaracion Atributos
+     */
     private int idCustomer;
 
     private String name;
@@ -12,11 +14,18 @@ public class Customer {
     private String mail;
 
     private String address;
- //Constructores
+
+    /**
+     * /Constructores
+     */
     public Customer() {
     }
 
-    //getters y setters
+    /**
+     * //getters y setters
+     * @return
+     */
+
     public int getIdCustomer() {
         return idCustomer;
     }
@@ -58,7 +67,10 @@ public class Customer {
     }
 
 
-    //Metodo ToString
+    /**
+     * //Metodo ToString
+     * @return
+     */
     @Override
     public String toString() {
         return "ID: " + idCustomer + ", Name: " + name + ", Number: " + number;
