@@ -3,6 +3,10 @@ package org.example.Model.DAO;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Donde llamo a todos mis metodos
+ * @param <T>
+ */
 interface DAO<T> extends AutoCloseable {
     // Método para buscar todos los elementos de tipo T en el almacén de datos
     List<T> findAll() throws SQLException;

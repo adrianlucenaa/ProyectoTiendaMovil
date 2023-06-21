@@ -8,7 +8,10 @@ import java.io.IOException;
 
 public class PrincipalController {
 
-    //Los botones
+
+    /**
+     * Declaracion Botones
+     */
     @FXML
     private Button CustomerButton;
 
@@ -17,6 +20,11 @@ public class PrincipalController {
 
     @FXML
     private Button BuysButton;
+
+    /**
+     * metodo que te dirige entre vistas
+     * @throws IOException
+     */
 
     //metodo que te dirige a la vista customer
     @FXML
